@@ -1,6 +1,7 @@
 {
   "name": "ecommerce-shop-demo-workspace",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@12.14.0",
   "engines": {

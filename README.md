@@ -3,6 +3,9 @@
 A quiet, editorial storefront for Next.js. Think warm ivory pages, a serif headline face, big photography and a bag that slides in from the side. It's built with **Next.js 16** and **[nuvui](https://nuvui.nuvraxis.com)**, and every piece of interface you see, from the mega menu to the size picker, is a nuvui component themed with design tokens. Dark mode comes along for free.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsajanv88%2Fnextjs-ecommerce-shop-demo&root-directory=apps%2Fecommerce-shop-demo&project-name=demoshop-nuvi&repository-name=demoshop-nuvi)
+[![License: MIT](https://img.shields.io/badge/license-MIT-b89a5e.svg)](LICENSE)
+
+> ✨ **Built with [nuvui](https://nuvui.nuvraxis.com).** Every button, menu, drawer and carousel in this store comes from nuvui, an open-source React component library with polished, accessible components that you theme with design tokens. If you like how this template looks and feels, you'll love building with it. **[Explore nuvui →](https://nuvui.nuvraxis.com)**
 
 ## What you get
 
@@ -12,6 +15,17 @@ A quiet, editorial storefront for Next.js. Think warm ivory pages, a serif headl
 - **SEO that's done properly.** Titles, descriptions and canonical URLs on every page, share images, a sitemap with images, `robots.txt`, real 404s, and structured data for products, collections, breadcrumbs and the FAQ.
 - **Fast by default.** Photos are served as AVIF or WebP, the first screen is preloaded, and pages stream in behind skeletons, so clicking around feels instant.
 - **Secure and accessible.** A strict Content Security Policy, validated input everywhere, keyboard-friendly menus and drawers, visible focus, and reduced-motion support.
+
+## Built on nuvui
+
+This template is a showcase for **[nuvui](https://nuvui.nuvraxis.com)**, and it's the reason the store came together so quickly. The whole storefront, from the mega menu, sheets, carousels and accordions to the size picker, toasts and animated prices, uses nuvui components out of the box. The luxury look is a single theme file of design tokens, so there's no fighting component styles.
+
+- **Polished components** for real products: navigation, forms, overlays, data display and more
+- **Accessible by default**, with keyboard support, focus management and ARIA wired up for you
+- **Themeable with tokens**, so light and dark modes and your brand colors live in one place
+- **Made for Next.js**, working nicely with Server Components and a strict Content Security Policy
+
+👉 **Browse the components, docs and ready-made blocks at [nuvui.nuvraxis.com](https://nuvui.nuvraxis.com).**
 
 ## Run it on your machine
 
@@ -102,3 +116,9 @@ apps/ecommerce-shop-demo/
 packages/tsconfig/      the shared TypeScript config
 charts/                 the Helm chart
 ```
+
+## License
+
+Free and open source under the [MIT License](LICENSE), © 2026 [sajanv88](https://github.com/sajanv88). Use it, fork it and build your own store with it, commercially or otherwise. A star on the repo or a link back to [nuvui](https://nuvui.nuvraxis.com) is always appreciated, but never required.
+
+The license covers the code. The demo photos and product copy aren't part of it; see [About the photos](#about-the-photos).
