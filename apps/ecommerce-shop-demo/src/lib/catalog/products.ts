@@ -1,4 +1,4 @@
-// The demo catalog: 40 pieces with four photographs each, in public/products/<handle>/.
+// The demo catalog: 40 pieces with three or four photographs each, in public/products/<handle>/.
 // Swap this module for a commerce backend; the functions in ./index.ts are the only readers.
 import type { Product } from "./types";
 
@@ -392,10 +392,6 @@ export const products = [
         src: "/products/echostructure-hoodie-youth/full-body.webp",
         alt: "EchoStructure Hoodie in red, worn, full length",
       },
-      {
-        src: "/products/echostructure-hoodie-youth/side-profile.webp",
-        alt: "EchoStructure Hoodie in red, worn, side profile",
-      },
     ],
   },
   {
@@ -463,10 +459,6 @@ export const products = [
       {
         src: "/products/frametrack-long-tee-mens/full-body.webp",
         alt: "FrameTrack Long Tee in black, worn, full length",
-      },
-      {
-        src: "/products/frametrack-long-tee-mens/side-profile.webp",
-        alt: "FrameTrack Long Tee in black, worn, side profile",
       },
     ],
   },
@@ -644,10 +636,6 @@ export const products = [
         src: "/products/lumenstream-hoodie-unisex/full-body.webp",
         alt: "LumenStream Hoodie in grey, worn, full length",
       },
-      {
-        src: "/products/lumenstream-hoodie-unisex/side-profile.webp",
-        alt: "LumenStream Hoodie in grey, worn, side profile",
-      },
     ],
   },
   {
@@ -786,10 +774,6 @@ export const products = [
         src: "/products/orbitstructure-jacket-youth/full-body.webp",
         alt: "OrbitStructure Jacket in pink, worn, full length",
       },
-      {
-        src: "/products/orbitstructure-jacket-youth/side-profile.webp",
-        alt: "OrbitStructure Jacket in pink, worn, side profile",
-      },
     ],
   },
   {
@@ -858,10 +842,6 @@ export const products = [
       {
         src: "/products/peakcontour-hoodie-mens/full-body.webp",
         alt: "PeakContour Hoodie in black, worn, full length",
-      },
-      {
-        src: "/products/peakcontour-hoodie-mens/side-profile.webp",
-        alt: "PeakContour Hoodie in black, worn, side profile",
       },
     ],
   },
@@ -967,10 +947,6 @@ export const products = [
         src: "/products/pivotlink-tee-unisex/full-body.webp",
         alt: "PivotLink Tee in yellow, worn, full length",
       },
-      {
-        src: "/products/pivotlink-tee-unisex/side-profile.webp",
-        alt: "PivotLink Tee in yellow, worn, side profile",
-      },
     ],
   },
   {
@@ -1002,10 +978,6 @@ export const products = [
       {
         src: "/products/pivotprime-tee-mens/full-body.webp",
         alt: "PivotPrime Tee in black, worn, full length",
-      },
-      {
-        src: "/products/pivotprime-tee-mens/side-profile.webp",
-        alt: "PivotPrime Tee in black, worn, side profile",
       },
     ],
   },
@@ -1109,10 +1081,6 @@ export const products = [
       {
         src: "/products/pulseway-tee-unisex/full-body.webp",
         alt: "PulseWay Tee in brown, worn, full length",
-      },
-      {
-        src: "/products/pulseway-tee-unisex/side-profile.webp",
-        alt: "PulseWay Tee in brown, worn, side profile",
       },
     ],
   },
