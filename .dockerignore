@@ -1,0 +1,13 @@
+# Build context is the repo root. Keep it to what `turbo prune` and the build need.
+**/node_modules
+**/.next
+**/.turbo
+**/dist
+**/coverage
+**/*.log
+**/.env*
+.git
+.github
+.vscode
+.claude
+charts

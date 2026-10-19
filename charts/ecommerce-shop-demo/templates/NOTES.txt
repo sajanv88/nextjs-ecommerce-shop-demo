@@ -1,0 +1,15 @@
+{{ include "app.fullname" . }} is running {{ include "app.image" . }}.
+
+{{- if .Values.ingress.enabled }}
+{{- range .Values.ingress.hosts }}
+  URL: http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .host }}
+{{- end }}
+{{- else }}
+  Try it locally:
+    kubectl -n {{ .Release.Namespace }} port-forward svc/{{ include "app.fullname" . }} 3000:{{ .Values.service.port }}
+    curl http://127.0.0.1:3000/api/health
+{{- end }}
+{{- if not .Values.existingSecret }}
+
+  No existingSecret is set: the app starts with the ConfigMap only.
+{{- end }}

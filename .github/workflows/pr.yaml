@@ -1,0 +1,121 @@
+# Checks every pull request, against any base branch. Publishes nothing.
+name: PR
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  APP: ecommerce-shop-demo
+  HELM_VERSION: v4.3.1
+  KUBECONFORM_IMAGE: ghcr.io/yannh/kubeconform:v0.8.0
+  KUBERNETES_VERSION: 1.34.0
+  NEXT_TELEMETRY_DISABLED: "1"
+  TURBO_TELEMETRY_DISABLED: "1"
+
+jobs:
+  quality:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # --affected diffs against the base branch, so it needs history, not just one commit.
+          fetch-depth: 0
+          filter: blob:none
+          persist-credentials: false
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec biome ci --reporter=github .
+      - run: pnpm exec stylelint "**/*.scss" --allow-empty-input
+      - run: pnpm exec turbo run typecheck test --affected
+      - run: pnpm audit --audit-level high
+
+  build:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          persist-credentials: false
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec turbo run build --affected
+
+  docker:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@v4
+      # One platform, loaded into the local daemon so it can be run. main.yaml builds both.
+      - uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: apps/${{ env.APP }}/Dockerfile
+          platforms: linux/amd64
+          push: false
+          load: true
+          tags: ${{ env.APP }}:pr
+          build-args: |
+            NEXT_DEPLOYMENT_ID=${{ github.event.pull_request.head.sha }}
+          # Reads the cache main.yaml writes; a PR never writes it.
+          cache-from: type=gha,scope=${{ env.APP }}
+      - name: Run the image and hit /api/health
+        run: |
+          docker run -d --name app -p 3000:3000 \
+            --read-only --tmpfs "/app/apps/${APP}/.next/cache:uid=1001,gid=1001" \
+            --cap-drop ALL --security-opt no-new-privileges \
+            "${APP}:pr"
+          for _ in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:3000/api/health; then exit 0; fi
+            sleep 1
+          done
+          docker logs app
+          exit 1
+
+  helm:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: azure/setup-helm@v5
+        with:
+          version: ${{ env.HELM_VERSION }}
+      - name: helm lint
+        run: |
+          helm lint --strict "charts/${APP}"
+          helm lint --strict "charts/${APP}" -f "charts/${APP}/values-production.yaml"
+      - name: helm template | kubeconform
+        run: |
+          {
+            helm template "${APP}" "charts/${APP}"
+            echo "---"
+            helm template "${APP}" "charts/${APP}" -f "charts/${APP}/values-production.yaml"
+          } | docker run --rm -i "${KUBECONFORM_IMAGE}" \
+                -strict -summary -kubernetes-version "${KUBERNETES_VERSION}" -

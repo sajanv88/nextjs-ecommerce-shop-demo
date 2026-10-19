@@ -1,0 +1,11 @@
+apiVersion: v2
+name: ecommerce-shop-demo
+description: Helm chart for the ecommerce-shop-demo Next.js app (ghcr.io/nuvraxis/ecommerce-shop-demo).
+type: application
+# Both are set by .github/workflows/release.yaml from the git tag (vX.Y.Z → version X.Y.Z,
+# appVersion vX.Y.Z) when the chart is packaged. Don't edit them by hand.
+version: 0.0.0
+appVersion: "0.0.0"
+home: https://github.com/nuvraxis/ecommerce-shop-demo
+sources:
+  - https://github.com/nuvraxis/ecommerce-shop-demo

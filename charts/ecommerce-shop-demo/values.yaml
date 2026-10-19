@@ -1,0 +1,127 @@
+# Defaults for ecommerce-shop-demo. values-production.yaml overrides what differs in production.
+
+replicaCount: 2
+
+image:
+  repository: ghcr.io/nuvraxis/ecommerce-shop-demo
+  # Empty means the chart's appVersion, which release.yaml sets to the git tag. When Argo CD
+  # syncs the chart straight from the repo (appVersion 0.0.0), set this to sha-<short-sha>.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+# GHCR packages are private by default. Create a docker-registry Secret with a token that
+# has read:packages and name it here, e.g. [{ name: ghcr-pull }].
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+
+podAnnotations: {}
+podLabels: {}
+
+# Matches the image: uid/gid 1001, no root, no privilege escalation, read-only root filesystem.
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+  runAsGroup: 1001
+  fsGroup: 1001
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: [ALL]
+
+containerPort: 3000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: nginx
+  annotations: {}
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+    # nginx.ingress.kubernetes.io/proxy-buffering: "off"   # streaming responses
+    # nginx.ingress.kubernetes.io/limit-rps: "20"
+  hosts:
+    - host: ecommerce-shop-demo.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+  #  - secretName: ecommerce-shop-demo-tls
+  #    hosts: [ecommerce-shop-demo.example.com]
+
+# No CPU limit: throttling a Node server under a burst hurts latency more than sharing a core.
+# The memory limit stays, because Node grows its heap to what it's given.
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 512Mi
+
+# All three probes hit /api/health, which never touches a dependency.
+probes:
+  startup:
+    httpGet: { path: /api/health, port: http }
+    periodSeconds: 2
+    failureThreshold: 30
+  liveness:
+    httpGet: { path: /api/health, port: http }
+    periodSeconds: 10
+    timeoutSeconds: 3
+    failureThreshold: 3
+  readiness:
+    httpGet: { path: /api/health, port: http }
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 2
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70
+
+podDisruptionBudget:
+  enabled: true
+  maxUnavailable: 1
+
+# Non-secret runtime configuration, rendered into a ConfigMap and loaded with envFrom.
+# A change rolls the pods (checksum annotation on the Deployment).
+config:
+  OTEL_SERVICE_NAME: ecommerce-shop-demo
+
+# Name of a Secret that already exists in the namespace (External Secrets, Sealed Secrets,
+# or created by hand). The chart only references it; secret values never go in values files.
+existingSecret: ""
+
+# Extra env entries, in the Kubernetes EnvVar shape.
+env: []
+
+# .next/cache must be writable with a read-only root filesystem.
+nextCache:
+  sizeLimit: 512Mi
+
+# Covers in-flight requests and after() callbacks on SIGTERM.
+terminationGracePeriodSeconds: 30
+
+revisionHistoryLimit: 3
+
+# Spread replicas across zones and nodes when the cluster can; never block scheduling on it.
+topologySpread:
+  enabled: true
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
