@@ -4,7 +4,13 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
-      "env": ["NEXT_PUBLIC_*", "NEXT_DEPLOYMENT_ID", "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY"],
+      "env": [
+        "NEXT_PUBLIC_*",
+        "NEXT_DEPLOYMENT_ID",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY",
+        "SITE_URL",
+        "VERCEL_PROJECT_PRODUCTION_URL"
+      ],
       "passThroughEnv": ["NEXT_TELEMETRY_DISABLED"]
     },
     "typecheck": {

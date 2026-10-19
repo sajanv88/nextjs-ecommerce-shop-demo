@@ -6,7 +6,8 @@ import * as v from "valibot";
 const ServerEnv = v.object({
   NODE_ENV: v.optional(v.picklist(["development", "production", "test"]), "production"),
   // The public origin, for canonical URLs, the sitemap and structured data. Set it in every
-  // environment that search engines can reach, e.g. https://shop.example.com.
+  // environment that search engines can reach, e.g. https://shop.example.com. Prerendered
+  // pages read it during `next build`, so the build needs it as well as the server.
   SITE_URL: v.optional(v.pipe(v.string(), v.url())),
   // Set by Vercel (a hostname without a scheme); the fallback when SITE_URL is unset.
   VERCEL_PROJECT_PRODUCTION_URL: v.optional(v.pipe(v.string(), v.minLength(1))),
