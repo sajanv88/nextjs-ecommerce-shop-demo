@@ -1,84 +1,104 @@
-# DemoShop Nuvi: a luxury storefront for Next.js
+# DemoShop Nuvi
 
-An editorial, responsive e-commerce template built with **Next.js 16** and **[nuvui](https://nuvui.nuvraxis.com)**. Every interface element (navigation, mega menu, drawers, carousels, size picker, quantity steppers, accordions, toasts, empty states) is a nuvui component, themed with tokens into a warm ivory-and-ink palette with a serif display face and full dark mode.
+A quiet, editorial storefront for Next.js. Think warm ivory pages, a serif headline face, big photography and a bag that slides in from the side. It's built with **Next.js 16** and **[nuvui](https://nuvui.nuvraxis.com)**, and every piece of interface you see, from the mega menu to the size picker, is a nuvui component themed with design tokens. Dark mode comes along for free.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnuvraxis%2Fecommerce-shop-demo&root-directory=apps%2Fecommerce-shop-demo&env=SITE_URL&envDescription=The%20public%20origin%20of%20the%20store%2C%20for%20canonical%20URLs%20and%20the%20sitemap&project-name=maison-nuvi&repository-name=maison-nuvi)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsajanv88%2Fnextjs-ecommerce-shop-demo&root-directory=apps%2Fecommerce-shop-demo&project-name=demoshop-nuvi&repository-name=demoshop-nuvi)
 
-## What's inside
+## What you get
 
-- **Pages**: home, collections index, collection with refinements and sorting, product with a photo gallery and size selection, search, bag, our story, and policies with a FAQ.
-- **Bag**: a drawer and a full page with quantity steppers, a free-shipping progress bar and order summary. The bag lives in the browser (validated with valibot) and syncs across tabs.
-- **SEO**:
-  - Per-page titles, descriptions and canonical URLs, with Open Graph and Twitter cards.
-  - A generated share image and an Apple touch icon.
-  - `sitemap.xml` with image entries, and `robots.txt`.
-  - JSON-LD structured data: `Organization`, `WebSite` with a search action, `ProductGroup` with an offer per size and a return policy, `BreadcrumbList`, `ItemList`, `CollectionPage` and `FAQPage`.
-  - Real 404 status codes for unknown products, collections and policies.
-  - Accordion content that stays in the HTML for crawlers.
-- **Performance**: product photos are served through `next/image` as AVIF or WebP, with the hero and above-the-fold cards preloaded. Fonts come from `next/font`, and the catalog is read through `"use cache"`.
-- **Security**: a nonce-based Content Security Policy, strict security headers, server-only modules, and validated search params and Server Action input.
-- **Accessibility**: skip link, named landmarks, keyboard-operable menus and drawers, visible focus rings, reduced-motion support, and 44px touch targets.
+- **A full shop.** Home page, collections with filters and sorting, product pages with a photo gallery and sizes, search, a bag (as a drawer and as a page), an "our story" page and policy pages with an FAQ.
+- **A bag that just works.** It lives in the browser, stays in sync across tabs, and shows how close the shopper is to free shipping.
+- **Prices in six currencies.** Shoppers can switch between USD, EUR, GBP, CAD, AUD and JPY from the header, and every price on the page rolls over to the new one. The choice is remembered on the next visit.
+- **SEO that's done properly.** Titles, descriptions and canonical URLs on every page, share images, a sitemap with images, `robots.txt`, real 404s, and structured data for products, collections, breadcrumbs and the FAQ.
+- **Fast by default.** Photos are served as AVIF or WebP, the first screen is preloaded, and pages stream in behind skeletons, so clicking around feels instant.
+- **Secure and accessible.** A strict Content Security Policy, validated input everywhere, keyboard-friendly menus and drawers, visible focus, and reduced-motion support.
 
-## Stack
+## Run it on your machine
 
-| | |
-| --- | --- |
-| Framework | Next.js 16 (App Router, Cache Components, typed routes, Turbopack) |
-| UI | `@nuvui/react` and `@nuvui/icons` |
-| Styles | SCSS with BEM, nuvui design tokens, stylelint |
-| Language | TypeScript 7, strict |
-| Lint and format | Biome |
-| Monorepo | pnpm workspaces and Turborepo |
-
-## Getting started
+You'll need **Node.js 24 or newer** (the repo pins 26 in `.node-version`) and **pnpm**. If you don't have pnpm yet, `corepack enable` sets up the right version for you.
 
 ```sh
 pnpm install
-pnpm dev          # http://localhost:3000
+pnpm dev
 ```
 
-Before you ship:
+Then open [http://localhost:3000](http://localhost:3000).
+
+Before you push anything, run the same checks CI runs:
 
 ```sh
 pnpm typecheck && pnpm lint && pnpm build
 ```
 
-## Configuration
+## Deploy it to Vercel
 
-| Variable | Required | What it's for |
+### The quick way
+
+Click **Deploy with Vercel** above. Vercel copies the repo into your GitHub account, points the project at the right folder and deploys it. You don't need to fill anything in. A couple of minutes later you have a live store.
+
+### Importing it yourself
+
+If you've already forked or cloned the repo:
+
+1. In Vercel, choose **Add New → Project** and import your repository.
+2. Set **Root Directory** to `apps/ecommerce-shop-demo`. This is the one setting that matters, because the store lives in a monorepo.
+3. Leave the framework, build command and install command on their defaults. Vercel spots Next.js, pnpm and Turborepo by itself.
+4. Keep **Node.js Version** on **24.x** (the default) under **Settings → Build and Deployment**.
+5. Click **Deploy**.
+
+### When you add your own domain
+
+Out of the box, the store uses your Vercel production address (`your-project.vercel.app`) for canonical URLs, the sitemap and structured data. Once you connect a custom domain:
+
+1. Go to **Settings → Environment Variables** and add `SITE_URL` with your full address, such as `https://shop.example.com`, for the Production environment.
+2. **Redeploy.** Many pages are prerendered at build time, so a new value only shows up after a fresh build.
+
+Preview deployments keep pointing their canonical URLs at production, which is what you want: search engines won't index your previews as separate sites.
+
+### Good to know
+
+- **The Vercel Toolbar on previews.** The store sends a strict, nonce-based Content Security Policy, and the toolbar's script doesn't carry the nonce, so the browser blocks it on preview deployments and logs a CSP error. If you want a clean console on previews, turn the toolbar off under **Settings → General → Vercel Toolbar**. Production isn't affected.
+- **Image optimization.** Product photos go through Vercel's image optimization, which counts toward your plan's usage. A demo store sits comfortably inside the free allowance, but keep an eye on it if you load in a large catalog.
+
+## Settings
+
+| Variable | Do you need it? | What it does |
 | --- | --- | --- |
-| `SITE_URL` | In production | The store's public origin, such as `https://shop.example.com`. Canonical URLs, the sitemap, `robots.txt` and structured data are built from it. On Vercel it falls back to the production domain. |
+| `SITE_URL` | Once you have a custom domain | Your store's public address. Canonical URLs, the sitemap, `robots.txt` and structured data are built from it. On Vercel it falls back to your production `.vercel.app` address. |
+| `OTEL_SERVICE_NAME` | No | The service name on OpenTelemetry traces. Defaults to `ecommerce-shop-demo`. |
 
-Copy `apps/ecommerce-shop-demo/.env.example` to `.env.local` to set it locally.
+For local development, copy `apps/ecommerce-shop-demo/.env.example` to `apps/ecommerce-shop-demo/.env.local` and edit it there.
 
-## Deploying to Vercel
+## Make it yours
 
-Import the repository and set the **Root Directory** to `apps/ecommerce-shop-demo`. The deploy button above does this for you. Vercel installs from the workspace root with pnpm.
+- **Name, tagline, email and navigation:** `src/lib/site.ts`.
+- **Colors, fonts and corner radii:** `src/styles/base/_theme.scss`. These are nuvui tokens, with the light and dark values side by side, so a rebrand is mostly a matter of changing a handful of lines.
+- **Products and collections:** `src/lib/catalog/products.ts` and `collections.ts`. Everything reads through `src/lib/catalog/index.ts`, so hooking up Shopify, a headless CMS or your own API means rewriting those few functions and nothing else.
+- **Currencies:** `src/lib/currency.ts`. The demo converts at fixed rates for display only and always charges in USD. For real multi-currency pricing, take the rates from your commerce platform.
+- **Checkout:** `src/components/cart/checkout-button.tsx` is where a Shopify checkout link or a Stripe Checkout session goes.
+- **Policies:** `src/lib/policies.ts`. This is template copy, so have it reviewed before you take real orders.
 
-The repository also ships a Dockerfile, a Helm chart and GitHub Actions for self-hosting. See `CLAUDE.md`.
+The star ratings and testimonials are sample content. They're deliberately kept out of the structured data, so search engines never see made-up reviews.
 
-## Making it yours
+## About the photos
 
-- **Brand, copy and navigation**: `src/lib/site.ts`.
-- **Colors, type and radii**: `src/styles/base/_theme.scss`. These are nuvui tokens, with light and dark values side by side.
-- **Products and collections**: `src/lib/catalog/products.ts` and `collections.ts`. Every read goes through `src/lib/catalog/index.ts`, so connecting Shopify, a headless CMS or your own API means changing those functions only.
-- **Checkout**: `src/components/cart/checkout-button.tsx` is where a Shopify checkout URL or a Stripe Checkout session would go.
-- **Policies**: `src/lib/policies.ts`. They are template copy, so have them reviewed before taking real orders.
+The demo catalog's product names, descriptions and studio shots come from Vercel's public demo store at [template.vercel.shop](https://template.vercel.shop), and the on-model photos are cropped versions of its images. Make sure you have the rights to use them before you put the store in front of customers, or swap in your own: drop them into `public/products/<handle>/` and update the paths in `products.ts`.
 
-The star ratings and testimonials are sample content. They are deliberately left out of the structured data.
+## Hosting it yourself
 
-## Product photography
+The repo also ships a Dockerfile, a Helm chart and GitHub Actions workflows that build and publish a container image. [CLAUDE.md](CLAUDE.md) walks through the whole pipeline.
 
-The demo catalog's names, descriptions and photographs come from Vercel's public demo store at [template.vercel.shop](https://template.vercel.shop). Confirm you have the rights to use them before you publish, or replace them with your own in `public/products/<handle>/`.
-
-## Project layout
+## Where things live
 
 ```
 apps/ecommerce-shop-demo/
-  src/app/                 routes, metadata, sitemap, robots, share image
-  src/components/          one folder per block: component + BEM stylesheet
-  src/lib/catalog/         data, types, cached readers, search-param parsing
-  src/lib/seo.ts           JSON-LD builders
-  src/styles/              tokens (theme), element defaults, page layout
-  public/products/         four photographs per product
+  src/app/              pages, metadata, sitemap, robots and share images
+  src/components/       one folder per component, each with its own stylesheet
+  src/lib/catalog/      the product data, its types and the cached readers
+  src/lib/currency.ts   display currencies and their rates
+  src/lib/seo.ts        structured data builders
+  src/styles/           theme tokens, element defaults and page layout
+  public/products/      three or four photos per product
+packages/tsconfig/      the shared TypeScript config
+charts/                 the Helm chart
 ```
