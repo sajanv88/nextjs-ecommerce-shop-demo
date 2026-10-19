@@ -1,0 +1,6 @@
+// A band of a page at the content width, with the space every section keeps above it.
+.section {
+  max-inline-size: var(--app-content-max-width);
+  margin: var(--app-section-space) auto 0;
+  padding-inline: var(--app-gutter);
+}

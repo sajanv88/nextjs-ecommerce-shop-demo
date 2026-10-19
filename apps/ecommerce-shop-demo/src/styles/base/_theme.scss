@@ -1,0 +1,99 @@
+@use "abstracts" as a;
+
+// Re-theme by setting nuvui's own token names. New tokens nuvui doesn't have get an --app- prefix.
+// The palette is warm ivory and ink, with a champagne accent used for detail, never for text
+// that has to be read. Every text pair keeps 4.5:1, every control edge 3:1.
+:root {
+  --app-content-max-width: 90rem;
+  --app-gutter: calc(var(--spacing) * 5);
+  --app-section-space: calc(var(--spacing) * 16);
+  --app-header-height: 4.5rem;
+
+  // Side padding for full-bleed bars (header, footer) that keeps their content in line with
+  // the content column on a very wide screen.
+  --app-bleed-padding: max(
+    var(--app-gutter),
+    calc((100% - var(--app-content-max-width)) / 2 + var(--app-gutter))
+  );
+
+  // next/font sets --app-font-sans and --app-font-display on <html>.
+  --font-sans: var(--app-font-sans), ui-sans-serif, system-ui, sans-serif;
+  --app-font-display: var(--app-font-serif), "Times New Roman", serif;
+
+  // Larger steps than nuvui's scale tops out at, for editorial headings.
+  --app-text-display: clamp(2.75rem, 1.6rem + 5vw, 6rem);
+  --app-text-hero: clamp(2.25rem, 1.5rem + 3.4vw, 4.5rem);
+  --app-text-title: clamp(1.875rem, 1.4rem + 1.8vw, 3rem);
+  --app-tracking-caps: 0.18em;
+  --color-background: oklch(98.2% 0.005 85deg);
+  --color-foreground: oklch(19% 0.008 60deg);
+  --color-surface: oklch(99.4% 0.003 85deg);
+  --color-surface-foreground: oklch(19% 0.008 60deg);
+  --color-muted: oklch(95% 0.007 80deg);
+  --color-muted-foreground: oklch(44% 0.012 60deg);
+  --color-primary: oklch(19% 0.008 60deg);
+  --color-primary-foreground: oklch(98.2% 0.005 85deg);
+  --color-border: oklch(90% 0.008 80deg);
+  --color-border-strong: oklch(56% 0.012 60deg);
+  --color-ring: oklch(19% 0.008 60deg);
+  --color-danger: oklch(50% 0.17 28deg);
+  --color-success: oklch(48% 0.1 150deg);
+
+  // Champagne, for rules, stars and small marks.
+  --app-color-accent: oklch(70% 0.085 78deg);
+
+  // The same hue, dark enough for marks that have to be seen: 3:1 on the page.
+  --app-color-accent-strong: oklch(55% 0.09 72deg);
+
+  // The photographs are shot on pale grey, so their frames stay pale in every theme.
+  --app-color-canvas: oklch(93.5% 0.004 80deg);
+  --app-color-canvas-foreground: oklch(19% 0.008 60deg);
+
+  // For text laid over a photograph.
+  --app-color-inverse: oklch(98.2% 0.005 85deg);
+  --app-color-scrim: oklch(14% 0.008 60deg / 72%);
+
+  // Sharp, tailored corners.
+  --radius-xs: 0.0625rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.1875rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.375rem;
+  --nuv-button-radius: var(--radius-full);
+  --nuv-input-group-radius: var(--radius-full);
+  --nuv-rating-on: var(--app-color-accent-strong);
+  --nuv-sheet-width: 28rem;
+  --nuv-toast-radius: var(--radius-md);
+
+  @include a.breakpoint("md") {
+    --app-gutter: calc(var(--spacing) * 8);
+    --app-section-space: calc(var(--spacing) * 24);
+  }
+
+  @include a.breakpoint("xl") {
+    --app-gutter: calc(var(--spacing) * 12);
+  }
+}
+
+// Dark values for every semantic color changed above: a value set on :root alone replaces
+// both the light and the dark one.
+@include a.dark {
+  color-scheme: dark;
+
+  --color-background: oklch(17.5% 0.006 60deg);
+  --color-foreground: oklch(94% 0.008 85deg);
+  --color-surface: oklch(21% 0.007 60deg);
+  --color-surface-foreground: oklch(94% 0.008 85deg);
+  --color-muted: oklch(25% 0.008 60deg);
+  --color-muted-foreground: oklch(74% 0.012 80deg);
+  --color-primary: oklch(92% 0.02 85deg);
+  --color-primary-foreground: oklch(17.5% 0.006 60deg);
+  --color-border: oklch(30% 0.008 60deg);
+  --color-border-strong: oklch(58% 0.012 70deg);
+  --color-ring: oklch(92% 0.02 85deg);
+  --color-danger: oklch(72% 0.14 28deg);
+  --color-success: oklch(76% 0.12 150deg);
+  --app-color-accent: oklch(78% 0.08 80deg);
+  --app-color-accent-strong: oklch(80% 0.09 80deg);
+  --app-color-scrim: oklch(12% 0.006 60deg / 75%);
+}

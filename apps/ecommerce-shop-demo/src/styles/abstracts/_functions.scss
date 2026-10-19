@@ -1,0 +1,4 @@
+/// Space on nuvui's spacing scale: space(4) → calc(var(--spacing) * 4).
+@function space($steps) {
+  @return calc(var(--spacing) * #{$steps});
+}

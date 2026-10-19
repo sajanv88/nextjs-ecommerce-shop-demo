@@ -1,0 +1,77 @@
+@use "abstracts" as a;
+
+// A page's content column, and the quiet pages with only a message: not found, an error.
+.page {
+  inline-size: 100%;
+  max-inline-size: var(--app-content-max-width);
+  margin-inline: auto;
+  padding: calc(var(--spacing) * 8) var(--app-gutter) 0;
+
+  @include a.breakpoint("md") {
+    padding-block-start: calc(var(--spacing) * 12);
+  }
+
+  // Directly under a catalog header and toolbar, which keep their own space.
+  &--flush {
+    padding-block-start: 0;
+
+    @include a.breakpoint("md") {
+      padding-block-start: 0;
+    }
+  }
+
+  &--narrow {
+    max-inline-size: 48rem;
+  }
+
+  &--message {
+    display: grid;
+    gap: calc(var(--spacing) * 5);
+    justify-items: center;
+    max-inline-size: 40rem;
+    padding-block: calc(var(--spacing) * 24);
+    text-align: center;
+  }
+
+  &__eyebrow {
+    margin: 0;
+    color: var(--color-muted-foreground);
+    font-size: var(--text-xs);
+    letter-spacing: var(--app-tracking-caps);
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: var(--app-text-hero);
+    font-weight: var(--font-weight-normal);
+  }
+
+  &__title--spaced {
+    margin-block: calc(var(--spacing) * 6) calc(var(--spacing) * 10);
+  }
+
+  &__lede {
+    margin: 0;
+    color: var(--color-muted-foreground);
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+  }
+
+  &__meta {
+    margin: 0;
+    color: var(--color-muted-foreground);
+    font-size: var(--text-sm);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) * 3);
+    justify-content: center;
+  }
+
+  &__section {
+    margin-block-start: var(--app-section-space);
+  }
+}

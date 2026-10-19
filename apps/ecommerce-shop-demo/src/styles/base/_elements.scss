@@ -1,0 +1,65 @@
+@use "abstracts" as a;
+
+// The app's own frame. nuvui styles its components and little else.
+// These are element defaults, so they go in nuvui's `base` layer: a component's own rules,
+// in the later `components` layer, still win over them (a Button that is a link keeps its
+// colors, a CardTitle keeps its type).
+@layer base {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-padding-block-start: calc(var(--app-header-height) + var(--spacing) * 4);
+    text-size-adjust: 100%;
+
+    @include a.motion-safe {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--app-font-display);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-tight);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  img {
+    display: block;
+    max-inline-size: 100%;
+  }
+
+  ::selection {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+  }
+}

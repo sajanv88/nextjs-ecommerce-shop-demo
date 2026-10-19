@@ -1,0 +1,31 @@
+@use "abstracts" as a;
+
+// The frame around every page: the skip link and the main landmark.
+.skip-link {
+  position: absolute;
+  inset-block-start: calc(var(--spacing) * 2);
+  inset-inline-start: calc(var(--spacing) * 2);
+  z-index: calc(var(--nuv-z-overlay) + 1);
+  padding: calc(var(--spacing) * 3) calc(var(--spacing) * 5);
+  border-radius: var(--radius-full);
+  background-color: var(--color-foreground);
+  color: var(--color-background);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transform: translateY(-200%);
+
+  &:focus-visible {
+    transform: none;
+  }
+
+  @include a.focus-ring;
+}
+
+.site-main {
+  display: block;
+  min-block-size: 60svh;
+
+  &:focus {
+    outline: none;
+  }
+}
