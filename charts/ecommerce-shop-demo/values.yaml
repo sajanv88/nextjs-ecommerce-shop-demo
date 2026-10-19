@@ -3,7 +3,7 @@
 replicaCount: 2
 
 image:
-  repository: ghcr.io/nuvraxis/ecommerce-shop-demo
+  repository: ghcr.io/sajanv88/ecommerce-shop-demo
   # Empty means the chart's appVersion, which release.yaml sets to the git tag. When Argo CD
   # syncs the chart straight from the repo (appVersion 0.0.0), set this to sha-<short-sha>.
   tag: ""

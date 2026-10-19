@@ -40,8 +40,8 @@ charts/ecommerce-shop-demo/          Helm chart, one per app
 ## Delivery
 
 PR → `pr.yaml` checks (Biome, stylelint, typecheck, build, Docker build + health check, helm lint + kubeconform). Nothing is published.
-Merge to `main` → `main.yaml` builds the image once (amd64 + arm64) and pushes `ghcr.io/nuvraxis/ecommerce-shop-demo:sha-<short-sha>` and `:main`.
-Tag `vX.Y.Z` → `release.yaml` retags that commit's image as `:vX.Y.Z` and `:latest` (no rebuild), pushes the chart to `oci://ghcr.io/nuvraxis/charts/ecommerce-shop-demo` at `X.Y.Z`, and creates the GitHub Release.
+Merge to `main` → `main.yaml` builds the image once (amd64 + arm64) and pushes `ghcr.io/<owner>/ecommerce-shop-demo:sha-<short-sha>` and `:main` (`<owner>` is the GitHub repo owner, lowercased; currently `sajanv88`).
+Tag `vX.Y.Z` → `release.yaml` retags that commit's image as `:vX.Y.Z` and `:latest` (no rebuild), pushes the chart to `oci://ghcr.io/<owner>/charts/ecommerce-shop-demo` at `X.Y.Z`, and creates the GitHub Release.
 Argo CD syncs the chart from the OCI registry (production) or from `charts/ecommerce-shop-demo` in git.
 
 Release ritual: merge to main → wait for `main.yaml` to go green → `git tag vX.Y.Z && git push origin vX.Y.Z`. Never edit `version`/`appVersion` in `Chart.yaml`; the release sets them.
