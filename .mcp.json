@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "nuvui": {
+      "type": "http",
+      "url": "https://nuvui.nuvraxis.com/mcp"
+    },
+    "next-devtools": {
+      "type": "stdio",
+      "command": "pnpm",
+      "args": ["dlx", "next-devtools-mcp@0.4.0"]
+    }
+  }
+}

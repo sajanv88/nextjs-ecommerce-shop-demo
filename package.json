@@ -1,0 +1,26 @@
+{
+  "name": "ecommerce-shop-demo-workspace",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "start": "turbo run start",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "lint": "biome check . && stylelint \"**/*.scss\" --allow-empty-input",
+    "lint:fix": "biome check --write . && stylelint \"**/*.scss\" --allow-empty-input --fix",
+    "format": "biome format --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "postcss": "catalog:",
+    "stylelint": "catalog:",
+    "stylelint-config-standard-scss": "catalog:",
+    "turbo": "2.11.9"
+  }
+}
