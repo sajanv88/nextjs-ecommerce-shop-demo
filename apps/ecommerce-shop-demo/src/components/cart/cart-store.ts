@@ -28,7 +28,7 @@ const CartLines = v.array(CartLine);
 
 export type CartLine = v.InferOutput<typeof CartLine>;
 
-const STORAGE_KEY = "maison-nuvi:bag:v1";
+const STORAGE_KEY = "demoshop-nuvi:bag:v1";
 const EMPTY: readonly CartLine[] = Object.freeze([]);
 
 let lines: readonly CartLine[] = EMPTY;

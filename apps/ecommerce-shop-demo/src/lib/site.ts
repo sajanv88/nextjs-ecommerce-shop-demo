@@ -5,10 +5,10 @@ export const site = {
   name: "DemoShop Nuvi",
   tagline: "Considered essentials for movement and the city",
   description:
-    "Maison Nuvi makes refined activewear in limited runs: technical outerwear, brushed fleece and fine jersey, cut for movement and finished for the city.",
+    "DemoShop Nuvi makes refined activewear in limited runs: technical outerwear, brushed fleece and fine jersey, cut for movement and finished for the city.",
   locale: "en-US",
   currency: "USD",
-  email: "care@maisonnuvi.example",
+  email: "care@demoshopnuvi.example",
   /** Orders at or above this subtotal ship free. */
   freeShippingThreshold: 150,
   returnDays: 30,
