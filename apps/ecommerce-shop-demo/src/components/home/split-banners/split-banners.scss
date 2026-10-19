@@ -1,0 +1,72 @@
+@use "abstracts" as a;
+
+.split-banners {
+  display: grid;
+  gap: calc(var(--spacing) * 3);
+  max-inline-size: var(--app-content-max-width);
+  margin: var(--app-section-space) auto 0;
+  padding-inline: var(--app-gutter);
+
+  @include a.breakpoint("md") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 4);
+  }
+
+  &__banner {
+    display: grid;
+    position: relative;
+    overflow: hidden;
+    align-items: end;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-sm);
+    background-color: var(--app-color-canvas);
+    color: var(--app-color-inverse);
+    text-decoration: none;
+
+    @include a.focus-ring(4px);
+  }
+
+  &__image {
+    object-fit: cover;
+    object-position: 50% 15%;
+
+    @include a.motion-safe {
+      transition: transform 1600ms var(--ease-out);
+    }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    &__banner:hover &__image {
+      transform: scale(1.03);
+    }
+  }
+
+  // Darkens the foot of the photograph so the words on it keep their contrast.
+  &__scrim {
+    position: absolute;
+    inset: 40% 0 0;
+    background-image: linear-gradient(to top, var(--app-color-scrim), transparent);
+  }
+
+  &__text {
+    display: grid;
+    position: relative;
+    gap: calc(var(--spacing) * 2);
+    padding: calc(var(--spacing) * 8);
+  }
+
+  &__title {
+    font-family: var(--app-font-display);
+    font-size: var(--app-text-hero);
+    line-height: 1;
+  }
+
+  &__line {
+    display: inline-flex;
+    gap: calc(var(--spacing) * 2);
+    align-items: center;
+    font-size: var(--text-sm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}

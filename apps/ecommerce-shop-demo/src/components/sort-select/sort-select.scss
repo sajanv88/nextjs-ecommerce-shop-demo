@@ -1,0 +1,24 @@
+@use "abstracts" as a;
+
+.sort-select {
+  display: flex;
+  gap: calc(var(--spacing) * 3);
+  align-items: center;
+
+  &[data-pending] {
+    opacity: 0.6;
+  }
+
+  &__label {
+    color: var(--color-muted-foreground);
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  &__trigger {
+    --nuv-select-radius: var(--radius-full);
+    --nuv-select-width: 13rem;
+  }
+}

@@ -1,0 +1,22 @@
+.currency-switcher {
+  &__trigger {
+    --nuv-button-gap: calc(var(--spacing) * 1);
+    --nuv-button-padding-inline: calc(var(--spacing) * 2.5);
+  }
+
+  &__menu {
+    --nuv-dropdown-menu-width: 15rem;
+  }
+
+  &__code {
+    display: inline-block;
+    min-inline-size: 2.75rem;
+    font-weight: var(--font-weight-medium);
+  }
+
+  // A note under the choices, which wraps rather than widening the menu.
+  &__note {
+    max-inline-size: 15rem;
+    white-space: normal;
+  }
+}

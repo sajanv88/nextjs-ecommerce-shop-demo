@@ -1,0 +1,80 @@
+@use "abstracts" as a;
+
+.category-tiles {
+  max-inline-size: var(--app-content-max-width);
+  margin: var(--app-section-space) auto 0;
+  padding-inline: var(--app-gutter);
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include a.breakpoint("sm") {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include a.breakpoint("lg") {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: calc(var(--spacing) * 4);
+    }
+  }
+
+  &__tile {
+    display: grid;
+    position: relative;
+    gap: calc(var(--spacing) * 3);
+    grid-template-columns: 1fr auto;
+    border-radius: var(--radius-sm);
+    color: inherit;
+    text-decoration: none;
+
+    @include a.focus-ring(4px);
+  }
+
+  &__media {
+    --nuv-aspect-ratio-radius: var(--radius-sm);
+
+    grid-column: 1 / -1;
+    background-color: var(--app-color-canvas);
+  }
+
+  &__image {
+    object-fit: cover;
+
+    @include a.motion-safe {
+      transition: transform 1200ms var(--ease-out);
+    }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    &__tile:hover &__image {
+      transform: scale(1.04);
+    }
+  }
+
+  &__label {
+    display: grid;
+    gap: calc(var(--spacing) * 0.5);
+  }
+
+  &__name {
+    font-family: var(--app-font-display);
+    font-size: var(--text-xl);
+    line-height: var(--leading-tight);
+  }
+
+  &__tagline {
+    color: var(--color-muted-foreground);
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__arrow {
+    margin-block-start: calc(var(--spacing) * 1);
+  }
+}

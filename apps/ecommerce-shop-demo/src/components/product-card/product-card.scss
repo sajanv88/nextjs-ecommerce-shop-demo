@@ -1,0 +1,104 @@
+@use "abstracts" as a;
+
+.product-card {
+  min-inline-size: 0;
+
+  &__link {
+    display: grid;
+    gap: calc(var(--spacing) * 4);
+    border-radius: var(--radius-sm);
+    color: inherit;
+    text-decoration: none;
+
+    @include a.focus-ring(4px);
+  }
+
+  &__frame {
+    position: relative;
+  }
+
+  &__media {
+    --nuv-aspect-ratio-radius: var(--radius-sm);
+
+    background-color: var(--app-color-canvas);
+  }
+
+  &__image {
+    object-fit: cover;
+
+    @include a.motion-safe {
+      transition:
+        opacity 600ms var(--ease-out),
+        transform 1200ms var(--ease-out);
+    }
+  }
+
+  // The studio shot is on white: multiplied, it sits on the canvas tone instead.
+  &__image--studio {
+    padding: 8%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+
+  &__image--worn {
+    opacity: 0;
+  }
+
+  &__link:focus-visible &__image--worn {
+    opacity: 1;
+  }
+
+  &__link:focus-visible &__image--studio {
+    opacity: 0;
+  }
+
+  // Only where the pointer can hover: on a touch screen :hover sticks after a tap.
+  @media (hover: hover) {
+    &__link:hover &__image--worn {
+      opacity: 1;
+    }
+
+    &__link:hover &__image--studio {
+      opacity: 0;
+    }
+  }
+
+  &__badges {
+    display: flex;
+    position: absolute;
+    inset-block-start: calc(var(--spacing) * 3);
+    inset-inline-start: calc(var(--spacing) * 3);
+    gap: calc(var(--spacing) * 1);
+    align-items: flex-start;
+  }
+
+  &__badge {
+    --nuv-badge-bg: var(--app-color-canvas);
+    --nuv-badge-fg: var(--app-color-canvas-foreground);
+    --nuv-badge-border: var(--app-color-canvas-foreground);
+  }
+
+  &__body {
+    display: grid;
+    gap: calc(var(--spacing) * 1);
+  }
+
+  &__title {
+    margin: 0;
+    font-family: var(--app-font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-snug);
+
+    @include a.breakpoint("md") {
+      font-size: var(--text-xl);
+    }
+  }
+
+  &__meta {
+    color: var(--color-muted-foreground);
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}

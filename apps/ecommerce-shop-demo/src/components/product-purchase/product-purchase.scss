@@ -1,0 +1,63 @@
+.product-purchase {
+  display: grid;
+  gap: calc(var(--spacing) * 6);
+
+  &__sizes {
+    display: grid;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  &__legend {
+    color: var(--color-muted-foreground);
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--app-tracking-caps);
+    text-transform: uppercase;
+  }
+
+  &__chosen {
+    color: var(--color-foreground);
+  }
+
+  &__size-group {
+    --nuv-toggle-group-gap: calc(var(--spacing) * 2);
+    --nuv-toggle-border: var(--color-border-strong);
+    --nuv-toggle-radius: var(--radius-full);
+    --nuv-toggle-padding-inline: calc(var(--spacing) * 5);
+
+    flex-wrap: wrap;
+  }
+
+  &__size {
+    min-inline-size: 3.5rem;
+  }
+
+  &__error {
+    min-block-size: 1.25rem;
+    margin: 0;
+    color: var(--color-danger);
+    font-size: var(--text-sm);
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: calc(var(--spacing) * 3);
+    align-items: end;
+  }
+
+  &__quantity {
+    display: grid;
+    gap: calc(var(--spacing) * 2);
+  }
+
+  &__stepper {
+    --nuv-number-field-width: 8.5rem;
+    --nuv-number-field-radius: var(--radius-full);
+    --nuv-number-field-height: max(var(--nuv-touch-size), var(--nuv-control-height-lg));
+  }
+
+  &__add {
+    inline-size: 100%;
+  }
+}

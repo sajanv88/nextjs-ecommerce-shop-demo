@@ -1,0 +1,30 @@
+@use "abstracts" as a;
+
+.announcement-bar {
+  display: flex;
+  gap: calc(var(--spacing) * 2);
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--spacing) * 2.5) var(--app-gutter);
+  background-color: var(--color-foreground);
+  color: var(--color-background);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-align: center;
+
+  &__text {
+    margin: 0;
+  }
+
+  &__link {
+    border-radius: var(--radius-xs);
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+
+    // The ring has to show against the inverted bar.
+    --nuv-focus-ring-color: var(--color-background);
+
+    @include a.focus-ring;
+  }
+}

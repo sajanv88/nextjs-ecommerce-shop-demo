@@ -1,0 +1,62 @@
+@use "abstracts" as a;
+
+.product-gallery {
+  --nuv-carousel-gap: calc(var(--spacing) * 2);
+  --nuv-carousel-thumbnail-size: 4.5rem;
+  --nuv-carousel-thumbnail-radius: var(--radius-sm);
+  --nuv-carousel-thumbnail-bg: var(--app-color-canvas);
+  --nuv-carousel-thumbnail-current: var(--color-foreground);
+  --nuv-carousel-controls-gap: calc(var(--spacing) * 3);
+
+  min-inline-size: 0;
+
+  &__stage {
+    position: relative;
+  }
+
+  &__photo {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    margin: 0;
+    border-radius: var(--radius-sm);
+    background-color: var(--app-color-canvas);
+  }
+
+  &__image {
+    object-fit: cover;
+  }
+
+  &__image--studio {
+    padding: 6%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+
+  // The space between the arrows is the photograph's, to drag by: the row lets a press
+  // through, and each arrow takes its own.
+  &__arrows {
+    display: flex;
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline: calc(var(--spacing) * 3);
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  &__arrow {
+    --nuv-carousel-button-bg: var(--app-color-canvas);
+    --nuv-carousel-button-fg: var(--app-color-canvas-foreground);
+    --nuv-carousel-button-border: transparent;
+
+    pointer-events: auto;
+  }
+
+  &__thumb-image {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+  }
+}

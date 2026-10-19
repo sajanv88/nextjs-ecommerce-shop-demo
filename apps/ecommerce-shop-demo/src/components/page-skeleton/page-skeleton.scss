@@ -1,0 +1,91 @@
+@use "abstracts" as a;
+
+.page-skeleton {
+  display: grid;
+  gap: calc(var(--spacing) * 5);
+  max-inline-size: var(--app-content-max-width);
+  margin-inline: auto;
+  padding: calc(var(--spacing) * 8) var(--app-gutter) 0;
+
+  &--narrow {
+    max-inline-size: 48rem;
+  }
+
+  &__title {
+    --nuv-skeleton-width: min(28rem, 80%);
+    --nuv-skeleton-height: var(--app-text-hero);
+  }
+
+  &__line {
+    --nuv-skeleton-width: min(36rem, 100%);
+  }
+
+  &__line--short {
+    --nuv-skeleton-width: 8rem;
+  }
+
+  &__line--lede {
+    --nuv-skeleton-width: min(30rem, 90%);
+  }
+
+  &__bar {
+    --nuv-skeleton-height: 3rem;
+
+    margin-block: calc(var(--spacing) * 4);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 10) calc(var(--spacing) * 3);
+
+    @include a.breakpoint("md") {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: calc(var(--spacing) * 14) calc(var(--spacing) * 6);
+    }
+
+    @include a.breakpoint("xl") {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  &__card {
+    display: grid;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  &__photo {
+    --nuv-skeleton-height: auto;
+    --nuv-skeleton-radius: var(--radius-sm);
+
+    aspect-ratio: 4 / 5;
+  }
+
+  &__product {
+    display: grid;
+    gap: calc(var(--spacing) * 10);
+
+    @include a.breakpoint("lg") {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: calc(var(--spacing) * 16);
+    }
+  }
+
+  &__gallery {
+    --nuv-skeleton-height: auto;
+    --nuv-skeleton-radius: var(--radius-sm);
+
+    aspect-ratio: 1;
+  }
+
+  &__details {
+    display: grid;
+    gap: calc(var(--spacing) * 5);
+    align-content: start;
+  }
+
+  &__button {
+    --nuv-skeleton-height: 3rem;
+    --nuv-skeleton-radius: var(--radius-full);
+  }
+}

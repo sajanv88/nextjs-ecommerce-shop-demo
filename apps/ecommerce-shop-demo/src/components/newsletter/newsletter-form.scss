@@ -1,0 +1,27 @@
+@use "abstracts" as a;
+
+.newsletter-form {
+  inline-size: 100%;
+  max-inline-size: 30rem;
+
+  &__field {
+    gap: calc(var(--spacing) * 2);
+  }
+
+  &__label {
+    font-size: var(--text-xs);
+    letter-spacing: var(--app-tracking-caps);
+    text-transform: uppercase;
+  }
+
+  &__row {
+    display: grid;
+    gap: calc(var(--spacing) * 2);
+
+    --nuv-input-radius: var(--radius-full);
+
+    @include a.breakpoint("sm") {
+      grid-template-columns: 1fr auto;
+    }
+  }
+}

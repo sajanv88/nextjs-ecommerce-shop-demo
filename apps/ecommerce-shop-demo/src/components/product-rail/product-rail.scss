@@ -1,0 +1,34 @@
+@use "abstracts" as a;
+
+.product-rail {
+  max-inline-size: var(--app-content-max-width);
+  margin: var(--app-section-space) auto 0;
+  padding-inline: var(--app-gutter);
+
+  &__carousel {
+    --nuv-carousel-slide-size: 72%;
+    --nuv-carousel-gap: calc(var(--spacing) * 3);
+    --nuv-carousel-controls-gap: calc(var(--spacing) * 8);
+    --nuv-carousel-button-border: var(--color-border-strong);
+    --nuv-carousel-button-bg: transparent;
+
+    @include a.breakpoint("sm") {
+      --nuv-carousel-slide-size: 44%;
+    }
+
+    @include a.breakpoint("md") {
+      --nuv-carousel-slide-size: 31%;
+      --nuv-carousel-gap: calc(var(--spacing) * 6);
+    }
+
+    @include a.breakpoint("xl") {
+      --nuv-carousel-slide-size: 23.5%;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    gap: calc(var(--spacing) * 2);
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,66 @@
+@use "abstracts" as a;
+
+.cart-line-item {
+  --nuv-item-padding-inline: 0;
+  --nuv-item-padding-block: calc(var(--spacing) * 4);
+  --nuv-item-gap: calc(var(--spacing) * 4);
+
+  align-items: flex-start;
+
+  &__media {
+    flex: none;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background-color: var(--app-color-canvas);
+  }
+
+  &__image {
+    inline-size: 4.5rem;
+    block-size: 5.625rem;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+  }
+
+  &__content {
+    display: grid;
+    gap: calc(var(--spacing) * 1);
+    min-inline-size: 0;
+  }
+
+  &__title {
+    font-family: var(--app-font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+  }
+
+  &__link {
+    border-radius: var(--radius-xs);
+    color: inherit;
+    text-decoration: none;
+
+    @include a.hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    @include a.focus-ring;
+  }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) * 3);
+    align-items: center;
+    justify-content: space-between;
+    margin-block-start: calc(var(--spacing) * 2);
+  }
+
+  &__quantity {
+    --nuv-number-field-width: 7.5rem;
+    --nuv-number-field-radius: var(--radius-full);
+  }
+
+  &__actions {
+    align-self: flex-start;
+  }
+}

@@ -1,0 +1,71 @@
+@use "abstracts" as a;
+
+.cart-view {
+  display: grid;
+  gap: calc(var(--spacing) * 10);
+
+  @include a.breakpoint("lg") {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: calc(var(--spacing) * 16);
+    align-items: start;
+  }
+
+  &__empty {
+    padding-block: calc(var(--spacing) * 16);
+  }
+
+  &__lines {
+    display: grid;
+    gap: calc(var(--spacing) * 2);
+  }
+
+  &__heading {
+    margin: 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+  }
+
+  &__summary {
+    @include a.breakpoint("lg") {
+      position: sticky;
+      inset-block-start: calc(var(--app-header-height) + var(--spacing) * 6);
+    }
+  }
+
+  &__totals {
+    display: grid;
+    gap: calc(var(--spacing) * 5);
+  }
+
+  &__rows {
+    display: grid;
+    gap: calc(var(--spacing) * 3);
+    margin: 0;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--spacing) * 4);
+    color: var(--color-muted-foreground);
+    font-size: var(--text-sm);
+  }
+
+  &__row--total {
+    color: var(--color-foreground);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+  }
+
+  // One full-width column, in place of the footer's row of buttons at the end.
+  &__actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: calc(var(--spacing) * 2);
+    justify-content: stretch;
+  }
+
+  &__checkout {
+    inline-size: 100%;
+  }
+}

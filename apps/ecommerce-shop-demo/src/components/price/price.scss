@@ -1,0 +1,29 @@
+.price {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing) * 2);
+  align-items: baseline;
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+
+  &--md {
+    font-size: var(--text-base);
+  }
+
+  &--lg {
+    font-size: var(--text-xl);
+  }
+
+  &__current {
+    color: var(--color-foreground);
+  }
+
+  &__current--sale {
+    color: var(--color-danger);
+  }
+
+  &__was {
+    color: var(--color-muted-foreground);
+    font-size: 0.875em;
+  }
+}

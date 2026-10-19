@@ -1,0 +1,77 @@
+.cart-sheet {
+  &__trigger {
+    position: relative;
+  }
+
+  &__count {
+    display: grid;
+    position: absolute;
+    inset-block-start: calc(var(--spacing) * 1);
+    inset-inline-end: calc(var(--spacing) * 0.5);
+    place-items: center;
+    min-inline-size: 1.125rem;
+    block-size: 1.125rem;
+    padding-inline: calc(var(--spacing) * 1);
+    border-radius: var(--radius-full);
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+    font-size: 0.6875rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__title {
+    font-family: var(--app-font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+  }
+
+  &__body {
+    display: grid;
+    gap: calc(var(--spacing) * 4);
+    align-content: start;
+  }
+
+  &__empty {
+    padding-block: calc(var(--spacing) * 10);
+  }
+
+  &__lines {
+    --nuv-item-group-gap: 0;
+  }
+
+  // The library lays the footer out as a row of buttons at the end; here it is a column
+  // across the whole panel.
+  &__footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: calc(var(--spacing) * 3);
+    align-self: stretch;
+    justify-content: stretch;
+    inline-size: 100%;
+  }
+
+  &__summary {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+  }
+
+  &__note {
+    margin: 0;
+    color: var(--color-muted-foreground);
+    font-size: var(--text-xs);
+  }
+
+  &__rule {
+    margin-block: calc(var(--spacing) * 1);
+  }
+
+  &__checkout,
+  &__view {
+    inline-size: 100%;
+  }
+}

@@ -1,0 +1,10 @@
+.shipping-progress {
+  display: grid;
+  gap: calc(var(--spacing) * 2);
+
+  &__text {
+    margin: 0;
+    color: var(--color-muted-foreground);
+    font-size: var(--text-sm);
+  }
+}

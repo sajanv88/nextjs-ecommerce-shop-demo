@@ -1,0 +1,25 @@
+@use "abstracts" as a;
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--spacing) * 10) calc(var(--spacing) * 3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include a.breakpoint("md") {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 14) calc(var(--spacing) * 6);
+  }
+
+  &--wide {
+    @include a.breakpoint("xl") {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  &__item {
+    min-inline-size: 0;
+  }
+}

@@ -1,0 +1,7 @@
+.site-breadcrumb {
+  --nuv-breadcrumb-gap: calc(var(--spacing) * 2);
+
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
