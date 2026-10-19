@@ -1,0 +1,42 @@
+@use "abstracts" as a;
+
+.policy {
+  display: grid;
+  gap: calc(var(--spacing) * 10);
+
+  &__header {
+    display: grid;
+    gap: calc(var(--spacing) * 4);
+    margin-block-start: calc(var(--spacing) * 6);
+  }
+
+  &__section {
+    display: grid;
+    gap: calc(var(--spacing) * 4);
+  }
+
+  &__heading {
+    margin: 0;
+    font-size: var(--text-2xl);
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--color-muted-foreground);
+    line-height: var(--leading-relaxed);
+  }
+
+  &__faq {
+    --nuv-accordion-padding-block: calc(var(--spacing) * 5);
+  }
+
+  &__more {
+    padding-block-start: calc(var(--spacing) * 6);
+    border-block-start: 1px solid var(--color-border);
+  }
+}
+
+// forceMount keeps each answer in the page for search engines; closed ones stay hidden.
+.policy__answer[data-state="closed"] {
+  display: none;
+}

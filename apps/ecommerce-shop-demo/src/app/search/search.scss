@@ -1,0 +1,24 @@
+@use "abstracts" as a;
+
+.search-form {
+  display: grid;
+  gap: calc(var(--spacing) * 3);
+  max-inline-size: 44rem;
+
+  @include a.breakpoint("sm") {
+    grid-template-columns: 1fr auto;
+  }
+
+  &__group {
+    --nuv-input-group-height: max(var(--nuv-touch-size), var(--nuv-control-height-lg));
+  }
+
+  &__empty {
+    padding-block: calc(var(--spacing) * 16);
+  }
+
+  &__suggestions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
